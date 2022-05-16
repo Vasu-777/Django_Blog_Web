@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} BLOG DETAIL {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+
+<!--lobster-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<style>
+  .action-icons a {
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+
+.action-icons a:hover {
+    color: #1976d2
+}
+  .mt-100 {
+    margin-top: 100px
+}
+
+.mb-100 {
+    margin-bottom: 100px
+}
+  .round img {
+    border-radius: 100%
+}
+
+  .card{
+    border-radius:25px;
+    margin-bottom: 40px;
+  }
+  .card-no-border .card {
+    border: 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.comment-widgets .comment-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer
+}
+
+.comment-widgets .comment-row {
+    border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+    padding: 8px
+}
+
+.comment-text:hover {
+    visibility: hidden
+}
+
+.comment-text:hover {
+    visibility: visible
+}
+
+  /*hello*/
+  @media(max-width:380px) {
+    .card-img-top {
+      height: 275px;
+    }
+  }
+
+  @media(min-width:568px) {
+    .end {
+      margin-left: auto
+    }
+  }
+
+  @media(max-width:768px) {
+    #post {
+      width: 100%
+    }
+  }
+
+  #clicked {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    text-align: center;
+    width: 100%;
+    background-color: #ecb21f;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 13px
+  }
+
+  #profile {
+    background-color: unset
+  }
+
+  #post {
+    margin: 10px;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    background-color: #ecb21f;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 13px;
+    width: 50%
+  }
+
+
+  #nav-items li a,
+  #profile {
+    text-decoration: none;
+    color: rgb(224, 219, 219);
+    background-color: black
+  }
+
+  .comments {
+    margin-top: 5%;
+    margin-left: 20px
+  }
+
+  .darker {
+    border: 1px solid #ecb21f;
+    background-color: black;
+    float: right;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+  }
+
+  .comment {
+    border: 1px solid rgba(16, 46, 46, 1);
+    background-color: rgba(16, 46, 46, 0.973);
+    float: left;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+  }
+
+  .comment h4,
+  .comment span,
+  .darker h4,
+  .darker span {
+    display: inline
+  }
+
+  .comment p,
+  .comment span,
+  .darker p,
+  .darker span {
+    color: rgb(184, 183, 183)
+  }
+
+  .h1,
+  .h4 {
+    color: white;
+    font-weight: bold
+  }
+
+  label {
+    color: rgb(212, 208, 208)
+  }
+
+  #align-form {
+    margin-top: 20px
+  }
+
+  .form-group p a {
+    color: white
+  }
+
+  #checkbx {
+    background-color: black
+  }
+
+  #darker img {
+    margin-right: 15px;
+    position: static
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background-color: black;
+    border: 1px solid rgba(16, 46, 46, 1);
+    border-radius: 12px
+  }
+
+  /*.form {
+  border: 1px solid rgba(16, 46, 46, 1);
+  background-color: rgba(16, 46, 46, 0.973);
+  border-radius: 5px;
+  padding: 20px
+}*/
+
+  label {
+    color: black;
+    font-size: 20px
+  }
+
+  .fa-facebook,
+  .fa-twitter,
+  .fa-instagram {
+    position: relative;
+    color: #157be0;
+    margin-left: 15px
+  }
+
+  .fa-facebook:hover {
+    color: #3B579D
+  }
+
+  .fa-twitter:hover {
+    color: #2CAAE1
+  }
+
+  .fa-instagram:hover {
+    color: #C22660
+  }
+
+  h1,
+  h3 {
+    font-family: 'Lobster', cursive;
+  }
+
+  .card-text {
+    font-size: 19px;
+    font-family: 'PT Sans Narrow', sans-serif;
+  }
+
+  h3 {
+    font-size: 40px;
+  }
+</style>
+{% endblock %}
+{% block content %}
+
+{% include 'intials/navbar.html' %}
+<!-- ASIDE -->
+<section
+  style="background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgb(117 132 136) 0%, rgb(22 24 27) 100.2% );">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 card mb-4  mt-3 left  top" style="background-color: aliceblue;border-radius:39px">
+        <div class="card-body">
+          <div class="row ">
+            <div class="col-md-9">
+              <h1> {{ post.title }} </h1>
+            </div>
+            <div class="col-md-3">
+              {% if post.author == request.user %}
+
+              <a class="btn btn-primary" href="{% url 'blog-update' post.id %}"style="margin-left:8px" >Edit</a>
+              <a class="btn btn-danger" href="{% url 'blog-delete' post.id %}"style="margin-left:2px" >Delete</a>
+
+              {% endif %}
+            </div>
+          </div>
+
+          <p class=" text-muted" style="font-size:12px">{{ post.author }} | {{post.date_posted | date:"F d, Y"}}</p>
+
+
+          <hr>
+          {% if post.image %}
+          <p> <img class="card-img-top" src="{{post.image.url}}" alt="{{ post.title }}" style="height: 397px;"></p>
+          {% endif %}
+
+          <p class="card-text"></p>{{ post.content|safe}}</p>
+        </div>
+
+      </div>
+
+      <div class="col-md-3 mx-auto mb-3 mt-3 text-center" style="padding-left: 24px;">
+        <div class="blog-sidebar p-2 shadow-sm rounded" style="background-color: aliceblue;">
+
+          <h2>About</h2>
+        
+          <img src="{{post.author.profile.image.url}}" class="rounded-circle" width="120" height="150" alt="Rob Smith">
+          
+          
+          <h4>{{post.author}}</h4>
+          <h6>{{post.author.profile.title}}</h6>
+          <p style="font-weight:400;font-size:0.8rem">
+            {{post.author.profile.skills}}
+          </p>
+          <p><a href="#"><i class="fab fa-facebook fa-lg"></i></a> <a
+              href="https://twitter.com/{{post.author.profile.twitter}}"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://www.instagram.com/{{post.author.profile.instagram}}/"><i
+                class="fab fa-instagram fa-lg"></i></a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          
+          <div class="card card-signin my-5" style="background-color: aliceblue;border-radius:49px">
+            <h1 style="color:rgb(17, 131, 224);padding-left:20px;padding-top:10px">Leave a Reply</h1>
+            <div class="card-body"> 
+              <div style="display:flex">        
+              <img class="card-img-left" src="{{user.profile.image.url}}" style="height:63px;border-radius: 50%;"> 
+              <div style="margin-left:16px"> 
+                <h4>{{user.username}}</h4>  
+               <h6 class=" text-muted" style="font-size:14px;margin: 0;
+              ">{{user.profile.title}}</h6> 
+             
+            </div> 
+            </div> 
+              <form class="form-signin mt-3" method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                  {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
+                    Comment</button><br/>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <h2 style="color:#D7E9F7;padding-left:48px">{{ comments.count }} Comments</h2>
+      <div class="row">
+        <div class="col-md-9">
+     
+      
+            <div class="card" style="background-color:aliceblue">
+                <div class="card-body">
+                    <h3 class="card-title">Recent Comments</h3>
+                    <h6 class="card-subtitle">Latest Comments section by users</h6>
+                </div>
+                {% if comments %}
+                {% for comment in comments %}
+                <div class="comment-widgets m-b-20">
+                    <div class="d-flex flex-row comment-row">
+                        <div class="p-2"><span class="round"><img src="{{user.profile.image.url}}" alt="user" width="50"></span></div>
+                        <div class="comment-text w-100">
+                            <h5>{{user.username}}</h5>
+                            <div class="comment-footer"> <span class="date text-muted">{{comment.created_on}}</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                            <p class="m-b-5 m-t-10">{{comment.body|linebreaks}}</p>
+                        </div>
+                    </div>
+                    
+      {% endfor %}
+      {% else %}
+      <h5 style="padding-left: 20px;color:rgb(230, 22, 22)">
+      No comments Yet. You will be first one Comment.</h5>
+{% endif %}
+
+    </div>
+</section>
+{% include 'intials/footer.html' %}
+{% endblock %}

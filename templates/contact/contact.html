@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+{% block title %} Contact Us{% endblock %}
+{% block content %}
+{% include 'intials/navbar.html' %}
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+<main>
+	<div class="title">
+		<h1 id="title">Contact Us</h1>
+		<p id="description">Thank you for contacting us</p>
+	</div>
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-info alert-dismissible fade show" role="alert">
+		{{ message}}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	{% endfor %}
+	{% endif %}
+	<form method="POST" id="survey-form">
+		{% csrf_token %}
+		<label for="name" id="name-label"  class="uno">Name</label>
+		<input type="text" name="name" id="name" placeholder="Enter your name" required>
+
+
+		<label for="email" id="email-label" class="uno">Email</label>
+		<input type="email"name='email' id="email" placeholder="Enter your email" required>
+
+		<label for="subject" id="subject-label" class="uno">Subject</label>
+		<input type="text" name='subject' id="subject" placeholder="Enter your subject">
+
+		<label for="message" id="message-label" class="uno">Message</label>
+		<textarea name='message' id='message' type="text"  placeholder="Enter your message"class="textarea uno" name="message"></textarea>
+
+
+
+		<button type="submit" id="submit" class="submit uno">Send your application</button>
+
+	</form>
+	</div>
+</main>
+<!-- <div class="footer-copyright">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-12 text-center">
+    <p>Copyright Blogzo © 2021. All rights reserved.</p>
+    </div>
+    </div>
+    </div>
+    </div> -->
+{% endblock %}

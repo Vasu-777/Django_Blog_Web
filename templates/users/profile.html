@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" class="css">
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block title %} Login {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<style>
+  .fa-facebook,
+.fa-twitter,
+.fa-instagram {
+    position: relative;
+    /*top: 75px;*/
+    left: -20.5%;
+    color: #ee8828;
+    margin-left: 15px
+}
+
+.fa-facebook:hover {
+    color: #3B579D
+}
+
+.fa-twitter:hover {
+    color: #2CAAE1
+}
+
+.fa-instagram:hover {
+    color: #C22660
+}
+</style>
+{% include 'intials/navbar.html' %}
+
+
+
+<main class="profilepage">
+  <div class="main-content">
+    <!-- Top navbar -->
+    
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hello {{user.username}}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                    <img src="{{user.profile.image.url}}" class="rounded-circle" height="180" width="180">
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="profile-btn btn-sm btn-info mr-4" style="color:white;">Connect</a>
+                <a href="#" class="profile-btn btn-sm btn-default float-right">Message</a>
+              </div>
+            </div>
+            <br><br>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="text-center">
+                <h3>
+                  {{user.username}}
+                </h3>
+                <div class="profile-details ">
+                  <i class="ni location_pin mr-2"></i>{{user.profile.title}}
+                </div>
+                <div class="profile-details mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i>Skills</div>{{user.profile.skills}}
+                
+                <div class="profile-details mt-2">
+                  <i class="ni education_hat mr-2"></i> Contact 
+                  </div>
+                   {{user.email}}<div class=" mt-2 " style="padding-left:13.352685050798259vh">
+                   <a href="#"><i class="fab fa-facebook fa-lg"></i></a> <a href="https://twitter.com/{{user.profile.twitter}}"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="https://www.instagram.com/{{user.profile.instagram}}/"><i class="fab fa-instagram fa-lg"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1 mb-5">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h2 class="info-profile">Profile Info</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                    
+                        {{u_form| crispy}}
+                        {{p_form| crispy}}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-primary mb-3" type="submit">Update</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  </main> 
+
+
+{% include 'intials/footer.html' %}
+{% endblock %}
